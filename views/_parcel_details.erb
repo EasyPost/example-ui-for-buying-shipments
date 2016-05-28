@@ -1,0 +1,45 @@
+	
+	<label class="control-label col-sm-2">USPS Predefined Parcel Options</label>
+	        
+	    <select id="selector" name="predefined">
+	     	<option disabled selected value> -- select an option -- </option>	
+	  		<option value="Card">Card</option>
+	  		<option value="FlatRateEnvelope">FlatRateEnvelope</option>
+	  		<option value="FlatRateGiftCardEnvelope">FlatRateGiftCardEnvelope</option>
+	  		<option value="FlatRateWindowEnvelope">FlatRateWindowEnvelope</option>
+	  		<option value="SmallFlatRateEnvelope">SmallFlatRateEnvelope</option>
+	  		<option value="FlatRatePaddedEnvelope">FlatRatePaddedEnvelope</option>
+	  		<option value="FlatRateLegalEnvelope">FlatRateLegalEnvelope</option>
+	  		<option value="SmallFlatRateBox">SmallFlatRateBox</option>
+	  		<option value="MediumFlatRateBox">MediumFlatRateBox</option>
+	  		<option value="LargeFlatRateBox">LargeFlatRateBox</option>
+	  		<option value="LargeFlatRateBoardGameBox">LargeFlatRateBoardGameBox</option>
+	  		<option value="Parcel">Parcel</option>
+		</select>
+
+
+	<button type="button" id="custom-form" oncick="toggleDiv()">Custom Dimensions</button>
+
+		<div id="hide-input">
+			<label class="control-label col-sm-10">Custom Parcel Details</label> 
+			<div class="col-sm-10">
+		   		<input type="number" step="any" name="width" placeholder="width">	
+			</div>    	
+
+		   	<div class="col-sm-10">
+		   		<input type="number" step="any" name="length" placeholder="length">	
+			</div>	
+	
+		   	<div class="col-sm-10">
+		    	<input type="number" step="any" name="height" placeholder="height">
+			</div>
+		</div>
+
+		<p>Note: If you have chosen predefined package option dimensions are not required expect for weight</p> 
+	    <div class="col-sm-10">
+	    	<input type="number" step="any" name="weight" placeholder="weight" required>
+		</div>
+
+	
+
+	

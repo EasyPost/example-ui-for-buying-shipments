@@ -1,0 +1,25 @@
+<a href="/">Home</a>
+<table>
+	<tr>
+		<th>Rate id</th>
+		<th>Rate</th>
+		<th>Currency</th>
+		<th>Carrier</th>
+		<th>Service</th>
+	</tr>
+	<% @shipment.each do |rate| %>
+		<tr>
+			<td><%= rate.id %></td>
+			<td><%= rate.rate %></td>
+			<td><%= rate.currency %> </td>
+			<td><%= rate.carrier %></td>
+			<td><%= rate.service %></td>
+			<td>
+				<form action = "/shipment/<%= rate.shipment_id %>/rate" method = "post">
+					<button type="submit" name="rate" value="<%=rate.id%>" class="btn btn-primary">Buy</button>
+				</form>
+			</td>
+		</tr>
+	<% end %>
+		
+</table>

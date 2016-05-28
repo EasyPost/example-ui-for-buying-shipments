@@ -1,0 +1,22 @@
+
+<form action='/shipment' method='post' class='form-horizontal' role="form"> 
+	<fieldset> 
+		<div class="row">
+			<% @count = 1 %>
+			<% 2.times do %>
+				<div class="form-group" style="padding:20px"> 	
+	        		<%= erb :_address %> 
+	        	</div>
+	        	<% @count += 1 %>
+	        <% end %>
+
+	        <div class="form-group" style="padding:20px">
+	     		<%= erb :_parcel_details %> 	       
+	   			<input class="right-align" type='submit' value='Get Rate'>
+	   		</div>
+		</div>
+	 </fieldset>
+</form>
+
+
+
