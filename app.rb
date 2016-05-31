@@ -3,13 +3,14 @@ require 'easypost'
 require 'tilt/erb'
 require 'dotenv'
 
-class App < Sinatra::Base
 
-	configure do
-		Dotenv.load
+class App < Sinatra::Base
+	Dotenv.load
+	
+	configure do 
 		EasyPost.api_key = ENV['EASYPOST_API_KEY']
 	end
-	
+
 	get '/' do
 		erb :index
 	end

@@ -7,7 +7,7 @@ way to programatically create shipments and postage labels.
 This project provides an example for buying shipments using EasyPost API.
 
 The application provides a minimal web application that can be hosted on any
-computer, and enables one to buy shipments and receive labels along a tracking number.
+computer, and enables one to buy shipments and receive labels along with a tracking number.
 
 ### Requirements
 
