@@ -1,6 +1,15 @@
-$(document).ready(function() {
-  $('#hide-input').hide(); //Initially form wil be hidden.
-  $('#custom-form').click(function() {
-    $('#hide-input').toggle();//Form toggles on button click
-  });
+$(document).ready(function() {	
+	$('#selector').on("change", function(value) {
+		hideShowInput()
+	});
 });
+
+
+function hideShowInput(){
+	if( $('#selector').val() === "parcel") {
+		$('#hide-input').show();
+	}
+	else{
+		$('#hide-input').hide();
+	}
+}

@@ -1,0 +1,13 @@
+<% if message%>
+	<h6 style="color:blue"><%= message %> </h6>
+<%end%>
+
+<% if errors %>
+	<%errors.each do |e| %>
+		<%e.each do |error| %>
+			<h6 style="color:red"> Error ! </h6>
+			<h6 style="color:red">Field: <%= error[:field] %></h6>
+			<h6 style="color:red">Message: <%= error[:message] %></h6>
+		<% end %>
+	<% end %>
+<% end %>

@@ -1,4 +1,12 @@
 <a href="/">Home</a>
+<% if locals.keys.include?(:error_message) %>
+	<%=erb :_errors, locals: {error: error_message} %>
+<% elsif flash[:error]%>
+	<%= flash[:error] %>
+<% end %>
+
+<%=erb :_verification_message, locals: {message: @message, errors: @errors} %>
+
 <table>
 	<tr>
 		<th>Rate id</th>
@@ -20,6 +28,5 @@
 				</form>
 			</td>
 		</tr>
-	<% end %>
-		
+	<% end %>		
 </table>

@@ -1,24 +1,20 @@
 	
-	<label class="control-label col-sm-2">USPS Predefined Parcel Options</label>
+	<label class="control-label col-sm-2">USPS Options</label>
 	        
-	    <select id="selector" name="predefined">
-	     	<option disabled selected value> -- select an option -- </option>	
-	  		<option value="Card">Card</option>
-	  		<option value="FlatRateEnvelope">Letter Envelope</option>
-	  		<option value="FlatRateGiftCardEnvelope">Gift Card Envelopes</option>
-	  		<option value="FlatRateWindowEnvelope">Window Envelopes</option>
-	  		<option value="SmallFlatRateEnvelope">Small Envelopes</option>
-	  		<option value="FlatRatePaddedEnvelope">Padded Envelopes</option>
-	  		<option value="FlatRateLegalEnvelope">Legal Envelopes</option>
-	  		<option value="SmallFlatRateBox">Small Box</option>
-	  		<option value="MediumFlatRateBox">Medium Boxes</option>
-	  		<option value="LargeFlatRateBox">Large Box</option>
-	  		<option value="LargeFlatRateBoardGameBox">Large Board Game Box</option>
-	  		<option value="Parcel">Parcel</option>
+	    <select id="selector" name="predefined" onchange = "hideShowInput()">	
+	  		<option value="Card">Flat Rate Card</option>
+	  		<option value="FlatRateEnvelope">Flat Rate Letter Envelope</option>
+	  		<option value="FlatRateGiftCardEnvelope">Flat Rate Gift Card Envelopes</option>
+	  		<option value="FlatRateWindowEnvelope">Flat Rate Window Envelopes</option>
+	  		<option value="SmallFlatRateEnvelope">Flat Rate Small Envelopes</option>
+	  		<option value="FlatRatePaddedEnvelope">Flat Rate Padded Envelopes</option>
+	  		<option value="FlatRateLegalEnvelope">Flat Rate Legal Envelopes</option>
+	  		<option value="SmallFlatRateBox">Flat Rate Small Box</option>
+	  		<option value="MediumFlatRateBox">Flat Rate Medium Boxes</option>
+	  		<option value="LargeFlatRateBox">Flat Rate Large Box</option>
+	  		<option value="LargeFlatRateBoardGameBox">Flat Rate Large Board Game Box</option>
+	  		<option value="Parcel" selected>Parcel</option>
 		</select>
-
-
-	<button type="button" id="custom-form" oncick="toggleDiv()">Custom Dimensions</button>
 
 		<div id="hide-input">
 			<label class="control-label col-sm-10">Custom Parcel Details</label> 

@@ -26,7 +26,6 @@ computer, and enables one to buy shipments and receive labels along with a track
 
 If you aren't seeing any labels, make sure you have bought some postage on
 EasyPost! You can walk through the
-[EasyPost Getting Started Guide](https://www.easypost.com/getting-started) using
-your test API Key and you won't be charged.
+[EasyPost Getting Started Guide](https://www.easypost.com/getting-started) using your test API Key.
 
 
