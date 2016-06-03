@@ -1,12 +1,14 @@
 $(document).ready(function() {	
 	$('#selector').on("change", function(value) {
-		hideShowInput()
+		var $this = $(this),
+     	value = $this.val();
+		hideShowInput(value)
 	});
 });
 
 
-function hideShowInput(){
-	if( $('#selector').val() === "parcel") {
+function hideShowInput(option){
+	if( option === "Parcel") {
 		$('#hide-input').show();
 	}
 	else{

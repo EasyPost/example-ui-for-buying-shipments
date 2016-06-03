@@ -87,7 +87,7 @@ class App < Sinatra::Base
 				erb :label	
 			end
 		else
-			flash[:error] = "Could not retrieve shipment."
+			flash[:error] = "Could not retrieve shipment"
 		end
 	end
 end
