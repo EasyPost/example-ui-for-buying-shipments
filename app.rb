@@ -4,9 +4,7 @@ require 'easypost'
 require 'tilt/erb'
 require 'dotenv'
 require 'pry'
-
 require './lib/helpers'
-
 
 class App < Sinatra::Base
 	set :after_handler, :show_exceptions
@@ -29,7 +27,7 @@ class App < Sinatra::Base
 		@errors = []
 		if EasyPost.api_key=="" || EasyPost.api_key==nil
 			status 401
-			erb :_errors, locals: {:error_message => "Check your API Key"}					
+			erb :index, locals: {:error_message => "Check your API Key"}					
 		else
 	        verify = {:verify => ['delivery','zip4']}
 

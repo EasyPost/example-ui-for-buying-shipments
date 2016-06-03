@@ -13,7 +13,7 @@ module Helpers
 
 	def print_message
 		if @errors.any?
-			 @message = "There are some Error. Check your errors below"
+			 @message = "There are some Errors. Check your errors below"
 		elsif @success.count == 4 
 			@message = "Your Address has been successfully verified!"
 		end
