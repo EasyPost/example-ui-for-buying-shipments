@@ -11,7 +11,7 @@ input[type='submit'] {
 .nav ul {
   list-style: none;
   background-color: #2c70b4;
-  text-align: center;
+  text-align: left;
   padding: 0;
   margin: 0;
 }
@@ -21,6 +21,7 @@ input[type='submit'] {
   line-height: 40px;
   height: 40px;
   border-bottom: 1px solid #888;
+  margin-left: 20px;
 }
  
 .nav a {

@@ -1,9 +1,6 @@
 <blockquote>
 	<h3> CONGRATS! </h1>
-	<p><em>
-		<h5> You have shipped your package with EasyPost </h5>
-		<h5> Here is your tracking code number and url for printing label </h5>
-	</em></p>
-	<p>Label: <a href="<%=@shipment_label.postage_label.label_url %>">Link To Your Label</a></p>
+	<p><em>You have shipped your package with EasyPost.</em></p>
+	<p><a href="<%=@shipment_label.postage_label.label_url %>">Your Label Link</a></p>
 	<p>Tracking code: <%=@shipment_label.tracking_code%></p>	
 </blockquote>
