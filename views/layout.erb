@@ -8,15 +8,25 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
 <!-- Milligram CSS minified -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css">
+<!-- My CSS -->
+		<link rel="stylesheet" type="text/css" href="/main.css">
 <!-- JQuery -->
 		<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 
-		<script type="text/javascript" src="thisjquery.js"></script>
-		</script>
+		<script type="application/javascript" src="/thisjquery.js"></script>
+
 		<title>EasyPost Shipping</title>
 	</head>
 	<body>
-		<h1> EasyPost Shipping </h1>
+		
+    	<div class="row">
+    		<div class="column column-10"><h3 class="navbar-brand">EasyPost</h3></div>
+  		</div>
+  		<div class="nav">
+      		<ul>
+        		<li class="home"><a href="/">Home</a></li>
+      		</ul>
+    	</div>
 		<div class="container">
 			<%= yield %>
 		</div>

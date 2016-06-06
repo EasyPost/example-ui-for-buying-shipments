@@ -1,9 +1,9 @@
-<div class="container">
-	<a href="/">Home</a>
+<blockquote>
 	<h3> CONGRATS! </h1>
-	<h5> You have shipped your package with EasyPost </h5>
-	<h5> Here is your url for printing your label and tracking code </h5>
-	<p> Label: <a href="<%=@shipment_label.postage_label.label_url %>">Link To Your Label</a> </p>
-	<p> Tracking code: <%=@shipment_label.tracking_code%></p>			
-</div>
-
+	<p><em>
+		<h5> You have shipped your package with EasyPost </h5>
+		<h5> Here is your tracking code number and url for printing label </h5>
+	</em></p>
+	<p>Label: <a href="<%=@shipment_label.postage_label.label_url %>">Link To Your Label</a></p>
+	<p>Tracking code: <%=@shipment_label.tracking_code%></p>	
+</blockquote>

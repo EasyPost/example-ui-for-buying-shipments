@@ -75,17 +75,24 @@ class App < Sinatra::Base
 	post '/shipment/:id/rate' do
 		if params["id"]
 			shipment = EasyPost::Shipment.retrieve(params["id"])
-			@shipment_label = shipment.buy(:rate => {id: params["rate"]})
-			if @shipment_label==""
+			label = shipment.buy(:rate => {id: params["rate"]})
+			if label==""
 				status 400
 				erb :rate, locals: {
 						error_message: "Oops! Shipment label creation not successful. Please try again."
 					}
 			else
-				erb :label	
+				redirect "/shipment/#{shipment.id}/rate/#{shipment["selected_rate"].id}"	
 			end
 		else
 			flash[:error] = "Could not retrieve shipment"
 		end
 	end
+
+	get '/shipment/:id/rate/:rate_id' do
+		@shipment_label = EasyPost::Shipment.retrieve(params["id"])
+		erb :label
+	end
+
+	run! if app_file == $0
 end

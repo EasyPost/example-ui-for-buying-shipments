@@ -1,4 +1,3 @@
-<a href="/">Home</a>
 <% if locals.keys.include?(:error_message) %>
 	<%=erb :_errors, locals: {error: error_message} %>
 <% elsif flash[:error]%>
