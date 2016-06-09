@@ -33,7 +33,7 @@ class App < Sinatra::Base
 		unless EasyPost.api_key || EasyPost.api_key != ""
       halt(401, erb(:index, locals: {:error_message => "Check your API Key"}))
 		end
-
+    # part of address object not address attrbute of shipment.
     if params[:verify] == "true"
       params[:address].merge!(settings.addr_verification)
     end
@@ -58,10 +58,8 @@ class App < Sinatra::Base
     end
 	end
 
-
   get '/shipment/:id' do
     shipment = EasyPost::Shipment.retrieve(params[:id])
-    to_address = EasyPost::Address.retrieve(shipment.to_address.id)
     halt 404, 'Not found' unless shipment
     erb :rate, locals: { shipment: shipment }
   end
