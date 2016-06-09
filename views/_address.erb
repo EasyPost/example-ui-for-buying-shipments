@@ -1,59 +1,1 @@
-<!-- # render_addr_verification_messages(to_address || nil) -->
-<div class="row">
-   <div class="column column-100">
-    <label class="control-label"><%= name %></label>
-  </div>
-</div>
-<div class="row">
-  <div class="column column-100">
-    <input type="text" name="address[name]" placeholder="First and last name">
-  </div>
-</div>
-  
-<div class="row">
-  <div class="column column-100">
-    <input type="text" name="address[company]" placeholder="Company Name">
-	</div>
-</div>
-
-<div class="row">
-  <div class="column column-100">
-    <input type="text" name="address[street1]" placeholder="Street address1" required>
-	</div>
-</div>
-
-<div class="row">
-  <div class="column column-100">
-    <input type="text" name="address[street2]" placeholder="Street address2" >
-	</div>
-</div>
-
-<div class="row">
-  <div class="column column-100">
-		<input type="text" name="address[city]" placeholder="City" required>
-	</div>
-</div>
-
-<div class="row">     
-  <div class="column column-100">
-    <input type="text" name="address[state]" placeholder="State" required>
-	</div>	
-</div>
-
-<div class="row">
-  <div class="column column-100">
-    <input type="text" name ="address[zip]" pattern="\d{5}" placeholder="zipcode 00000" required>
-	</div>
-</div>
-
-<div class="row">
-  <div class="column column-100">
-    <input type="text" name ="address[phone]" placeholder="000-000-0000">
-	</div>
-</div>
-
-<div class="row">
-  <div class="column column-100">
-    <input type="checkbox" name ="verify" value="true"> Verify Address<br>
-	</div>
-</div>
+<% if locals.keys.include?(:exception) %>  <%= render_addr_verification_messages(exception.json_body) %><% end %><div class="row">  <div class="column column-70">    <label class="control-label"><%= name %></label>  </div></div><div class="row">  <div class="column column-70">    <input type="text" name="address[name]" placeholder="First and last name">  </div></div><div class="row">  <div class="column column-70">    <input type="text" name="address[company]" placeholder="Company Name">  </div></div><div class="row">  <div class="column column-70">    <input type="text" name="address[street1]" placeholder="Street address1" required>  </div></div><div class="row">  <div class="column column-70">    <input type="text" name="address[street2]" placeholder="Street address2" >  </div></div><div class="row">  <div class="column column-70">    <input type="text" name="address[city]" placeholder="City" required>  </div></div><div class="row">  <div class="column column-70">    <input type="text" name="address[state]" placeholder="State" required>  </div></div><div class="row">  <div class="column column-70">    <input type="text" name ="address[zip]" pattern="\d{5}" placeholder="zipcode 00000" required>  </div></div><div class="row">  <div class="column column-70">    <input type="text" name ="address[phone]" placeholder="000-000-0000">  </div></div><div class="row">  <div class="column column-70">    <input type="checkbox" name ="verify" value="true"> Verify Address<br>  </div></div>
