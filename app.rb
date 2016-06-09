@@ -43,7 +43,7 @@ class App < Sinatra::Base
       from_address = EasyPost::Address.retrieve(from_addr_id)
 		  to_address = EasyPost::Address.create(params[:address])
 
-	    shipment = EasyPost::Shipment.create(
+      shipment = EasyPost::Shipment.create(
         :from_address => from_address,
         :to_address => to_address,
         :parcel => params[:parcel]
