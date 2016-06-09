@@ -7,8 +7,8 @@ require 'pry'
 require './lib/helpers'
 
 class App < Sinatra::Base
-	set :show_exceptions, false
-	enable :sessions
+  set :show_exceptions, false
+  enable :sessions
   register Sinatra::Flash
   helpers Helpers
 	
