@@ -5,6 +5,7 @@ require 'tilt/erb'
 require 'dotenv'
 require 'pry'
 require './lib/helpers'
+
 class App < Sinatra::Base
   set :show_exceptions, false
   enable :sessions
@@ -32,23 +33,24 @@ class App < Sinatra::Base
     unless EasyPost.api_key || EasyPost.api_key != ""
       halt(401, erb(:index, locals: {:error_message => "Check your API Key"}))
     end
-    # part of address object not address attrbute of shipment.
+    # part of address object not address attribute of shipment.
     if params[:verify] == "true"
       params[:address].merge!(settings.addr_verification)
     end
 
     begin
-      from_addr_id = "adr_XXXXXXXXXXXXXXXXXXXXXXXXXXX70604"
+      from_addr_id = ENV['FROM_ADDRESS_ID']   
       from_address = EasyPost::Address.retrieve(from_addr_id)
       to_address = EasyPost::Address.create(params[:address])
       shipment = EasyPost::Shipment.create(
         :from_address => from_address,
         :to_address => to_address,
         :parcel => params[:parcel]
-        )
+      )
       redirect "shipment/#{shipment.id}"
     rescue EasyPost::Error => e
-      erb :index, locals: {from_address: from_address,
+      erb :index, locals: {
+        from_address: from_address,
         to_address: to_address,
         parcel: params[:parcel],
         verify: "true",
@@ -60,7 +62,7 @@ class App < Sinatra::Base
   get '/shipment/:id' do
     shipment = EasyPost::Shipment.retrieve(params[:id])
     halt 404, 'Not found' unless shipment
-    erb :rate, locals: { shipment: shipment }
+    erb :rate, locals: {shipment: shipment}
   end
 
   post '/shipment/:id/label' do
@@ -71,14 +73,14 @@ class App < Sinatra::Base
       raise "Failed to buy label" unless shipment.postage_label
       redirect "shipment/#{shipment.id}/label"
     rescue e
-      halt 400, erb(:rate, locals: { error_message: e.message })
+      halt 400, erb(:rate, locals: {error_message: e.message})
     end
   end
 
   get '/shipment/:id/label' do
     shipment = EasyPost::Shipment.retrieve(params["id"])
     halt 404, 'Not found' unless shipment
-    erb :label, locals: { shipment: shipment }
+    erb :label, locals: {shipment: shipment}
   end
   run! if app_file == $0
 end
