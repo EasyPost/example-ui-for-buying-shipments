@@ -1,10 +1,6 @@
 <% if locals.keys.include?(:error_message) %>
-	<%=erb :_errors, locals: {error: error_message} %>
-<% elsif flash[:error]%>
-	<%= flash[:error] %>
+	<%= error_message %>
 <% end %>
-
-<%=erb :_verification_message, locals: {message: @message, errors: @errors} %>
 
 <table>
 	<tr>
@@ -14,7 +10,7 @@
 		<th>Carrier</th>
 		<th>Service</th>
 	</tr>
-	<% @shipment.each do |rate| %>
+	<% shipment.rates.each do |rate| %>
 		<tr>
 			<td><%= rate.id %></td>
 			<td><%= rate.rate %></td>
@@ -22,7 +18,7 @@
 			<td><%= rate.carrier %></td>
 			<td><%= rate.service %></td>
 			<td>
-				<form action = "/shipment/<%= rate.shipment_id %>/rate" method = "post">
+				<form action = "/shipment/<%= rate.shipment_id %>/label" method = "post">
 					<button type="submit" name="rate" value="<%=rate.id%>" class="btn btn-primary">Buy</button>
 				</form>
 			</td>

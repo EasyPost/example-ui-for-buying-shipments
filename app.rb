@@ -7,91 +7,81 @@ require 'pry'
 require './lib/helpers'
 
 class App < Sinatra::Base
-	set :after_handler, :show_exceptions
+	set :show_exceptions, false
 	enable :sessions
-    register Sinatra::Flash
-    helpers Helpers
-
-	Dotenv.load
+  register Sinatra::Flash
+  helpers Helpers
 	
-	configure do 
+  configure :development, :test do
+    Dotenv.load
+  end
+	
+	configure do 	
 		EasyPost.api_key = ENV['EASYPOST_API_KEY']
+    set :addr_verification, {:verify_strict => ['delivery','zip4']}
 	end
 
 	get '/' do
-		erb :index
+		redirect '/shipment'
 	end
+
+  get '/shipment' do
+    erb :index
+  end
 
 	post '/shipment' do
-		@success = []
-		@errors = []
-		if EasyPost.api_key=="" || EasyPost.api_key==nil
-			status 401
-			erb :index, locals: {:error_message => "Check your API Key"}					
-		else
-	        verify = {:verify => ['delivery','zip4']}
-
-	        if params["pre-verify"] == "true"
-	        	params[:address][0].merge!(verify)
-	        	params[:address][1].merge!(verify)
-
-	        	from_address = EasyPost::Address.create(params[:address][0])
-		        to_address = EasyPost::Address.create(params[:address][1])
-
-		        if from_address && to_address
-		        	verification(from_address[:verifications], @success, @errors )
-		        	verification(to_address[:verifications], @success, @errors)
-		        	print_message
-		        end
-		     end
-
-	        parcel = {
-	        	:width => params["width"],
-	            :length => params["length"],
-	            :height => params["height"],
-	            :weight => params["weight"],
-	            :predefined_package => params["predefined"]
-	        }
-
-	        shipment = EasyPost::Shipment.create(
-		     :to_address => params[:address][0],
-		     :from_address => params[:address][1],
-		     :parcel => parcel
-			)
-
-			@shipment = shipment.rates
-
-		    if shipment.rates.count == 0
-				status 400 
-				erb :rate, locals: {
-					:error_message => "Oops! Shipping object could not be created. Please try again."
-				}
-		 	else	
-	        	erb :rate
-	    	end
+		unless EasyPost.api_key || EasyPost.api_key != ""
+      halt(401, erb(:index, locals: {:error_message => "Check your API Key"}))
 		end
+
+    if params[:verify] == "true"
+      params[:address].merge!(settings.addr_verification)
+    end
+
+    begin	
+			from_addr_id = "adr_XXXXXXXXXXXXXXXXXXXXXXXXXXX70604"
+      from_address = EasyPost::Address.retrieve(from_addr_id)
+		  to_address = EasyPost::Address.create(params[:address])
+
+	    shipment = EasyPost::Shipment.create(
+        :from_address => from_address,
+        :to_address => to_address,
+        :parcel => params[:parcel]
+      )
+
+      redirect "shipment/#{shipment.id}"
+    rescue EasyPost::Error => e
+      erb :index, locals: {from_address: from_address,
+                           to_address: to_address,
+                           parcel: params[:parcel],
+                           verify: "true",  exception: e}
+    end
 	end
 
-	post '/shipment/:id/rate' do
-		if params["id"]
-			shipment = EasyPost::Shipment.retrieve(params["id"])
-			label = shipment.buy(:rate => {id: params["rate"]})
-			if label==""
-				status 400
-				erb :rate, locals: {
-						error_message: "Oops! Shipment label creation not successful. Please try again."
-					}
-			else
-				redirect "/shipment/#{shipment.id}/rate/#{shipment["selected_rate"].id}"	
-			end
-		else
-			flash[:error] = "Could not retrieve shipment"
-		end
+
+  get '/shipment/:id' do
+    shipment = EasyPost::Shipment.retrieve(params[:id])
+    to_address = EasyPost::Address.retrieve(shipment.to_address.id)
+    halt 404, 'Not found' unless shipment
+    erb :rate, locals: { shipment: shipment }
+  end
+
+	post '/shipment/:id/label' do
+    shipment = EasyPost::Shipment.retrieve(params[:id])
+    halt 404, 'Not found' unless shipment
+    begin
+      shipment.buy(:rate => {id: params[:rate]})
+      raise "Failed to buy label" unless shipment.postage_label
+      redirect "shipment/#{shipment.id}/label"
+    rescue e
+      halt 400, erb(:rate, locals: { error_message: e.message }) 
+    end  
 	end
 
-	get '/shipment/:id/rate/:rate_id' do
-		@shipment_label = EasyPost::Shipment.retrieve(params["id"])
-		erb :label
+	get '/shipment/:id/label' do
+		shipment = EasyPost::Shipment.retrieve(params["id"])
+    halt 404, 'Not found' unless shipment
+    erb :label, locals: { shipment: shipment }
 	end
 
 	run! if app_file == $0
