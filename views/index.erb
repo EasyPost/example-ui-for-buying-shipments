@@ -2,6 +2,10 @@
   <%= erb :_errors, locals: {error: error_message} %>
 <% end %>
 
+<% if locals.keys.include?(:exception) %>
+  <%= render_addr_verification_messages(exception.json_body) %>
+<% end %>
+
 <form action='/shipment' method='post' class='form-horizontal' role="form">
   <fieldset>
     <div class="row">
