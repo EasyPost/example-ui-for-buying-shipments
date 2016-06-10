@@ -11,14 +11,14 @@ class App < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
   helpers Helpers
-  
+
   configure :development, :test do
     Dotenv.load
   end
 
   configure do
     EasyPost.api_key = ENV['EASYPOST_API_KEY']
-    set :addr_verification, {:verify_strict => ['delivery','zip4']}
+    set :addr_verification, {verify_strict: ['delivery','zip4']}
   end
 
   get '/' do
@@ -31,7 +31,7 @@ class App < Sinatra::Base
 
   post '/shipment' do
     unless EasyPost.api_key || EasyPost.api_key != ""
-      halt(401, erb(:index, locals: {:error_message => "Check your API Key"}))
+      halt(401, erb(:index, locals: {error_message: "Check your API Key"}))
     end
     # part of address object not address attribute of shipment.
     if params[:verify] == "true"
@@ -39,18 +39,17 @@ class App < Sinatra::Base
     end
 
     begin
-      from_addr_id = ENV['FROM_ADDRESS_ID']   
-      from_address = EasyPost::Address.retrieve(from_addr_id)
+      from_addr_id = ENV['FROM_ADDRESS_ID']
       to_address = EasyPost::Address.create(params[:address])
       shipment = EasyPost::Shipment.create(
-        :from_address => from_address,
-        :to_address => to_address,
-        :parcel => params[:parcel]
+        from_address: {id: from_addr_id},
+        to_address: {id: to_address[:id]},
+        parcel: params[:parcel]
       )
       redirect "shipment/#{shipment.id}"
     rescue EasyPost::Error => e
       erb :index, locals: {
-        from_address: from_address,
+        from_address: {id: from_addr_id},
         to_address: to_address,
         parcel: params[:parcel],
         verify: "true",
@@ -69,7 +68,7 @@ class App < Sinatra::Base
     shipment = EasyPost::Shipment.retrieve(params[:id])
     halt 404, 'Not found' unless shipment
     begin
-      shipment.buy(:rate => {id: params[:rate]})
+      shipment.buy(rate: {id: params[:rate]})
       raise "Failed to buy label" unless shipment.postage_label
       redirect "shipment/#{shipment.id}/label"
     rescue e
