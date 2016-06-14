@@ -7,17 +7,20 @@
 <% end %>
 
 <form action='/shipment' method='post' class='form-horizontal' role="form">
-  <fieldset>
     <div class="row">
-      <div class="form-group" style="padding:20px">
-        <%= erb :_address, locals: {name: "To Address"}%>
+      <div class="column column-50">
+        <div class="form-group" style="padding:20px">
+          <%= erb :_address, locals: {name: "To Address"}%>
+        </div>
       </div>
-      <div class="form-group" style="padding:20px">
-        <%= erb :_parcel_details %>
-        <input class="right-align" type='submit' value='Get Rate'>
+      <div class="column column-50">
+        <div class="form-group" style="padding:20px">
+          <%= erb :_parcel_details %>
+          <input type='submit' value='Get Rate'>
+        </div>
       </div>
     </div>
-  </fieldset>
+  </div>
 </form>
 
 

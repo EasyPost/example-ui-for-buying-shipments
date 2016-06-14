@@ -15,6 +15,7 @@ input[type='submit'] {
   padding: 0;
   margin: 0;
 }
+
 .nav li {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
@@ -23,27 +24,27 @@ input[type='submit'] {
   border-bottom: 1px solid #888;
   margin-left: 20px;
 }
- 
+
 .nav a {
   text-decoration: none;
   color: #fff;
   display: block;
   transition: .3s background-color;
 }
- 
+
 .nav a:hover {
   font-size:20px;
   color:#FFF;
       transition: all 0.3s ease-in;
       text-decoration:none;
 }
- 
+
 .nav a.active {
   background-color: #fff;
   color: #444;
   cursor: default;
 }
- 
+
 @media screen and (min-width: 600px) {
   .nav li {
     width: 120px;
@@ -52,10 +53,8 @@ input[type='submit'] {
     line-height: 50px;
     font-size: 1.4em;
   }
- 
+
   .nav li {
     display: inline-block;
     margin-right: -4px;
   }
- 
-}
