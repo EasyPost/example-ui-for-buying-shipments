@@ -8,7 +8,7 @@ input[type='submit'] {
   border: .1rem solid #2c70b4;
 }
 
-.nav ul {
+.nav {
   list-style: none;
   background-color: #2c70b4;
   text-align: left;
@@ -16,7 +16,7 @@ input[type='submit'] {
   margin: 0;
 }
 
-.nav li {
+.nav .home {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
   line-height: 40px;
