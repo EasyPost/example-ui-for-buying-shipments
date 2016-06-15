@@ -28,13 +28,13 @@ class App < Sinatra::Base
   end
 
   post '/shipment' do
-    # part of address object not address attribute of shipment.
-    if params[:verify] == "true"
-      params[:address].merge!(settings.addr_verification)
-    end
-
     begin
       from_addr_id = ENV['FROM_ADDRESS_ID']
+      to_address = if params[:verify] == "true"
+                     EasyPost::Address.create(params[:address].merge(settings.addr_verification))
+                   else
+                     params[:address]
+                   end
       to_address = EasyPost::Address.create(params[:address])
       shipment = EasyPost::Shipment.create(
         from_address: {id: from_addr_id},
