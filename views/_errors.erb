@@ -1,1 +1,5 @@
-<h6 style="color:red">ERROR:<%= error%></h6>
+<% if exception.message.include?("verify address") %>
+  <%= render_addr_verification_messages(exception.json_body) %>
+<% else %>
+  <p style="color:red"><%= exception.message %></p>
+<% end %>

@@ -1,5 +1,5 @@
-<% if locals.keys.include?(:error_message) %>
-  <%= error_message %>
+<% if locals.keys.include?(:exception) %>
+  erb :_errors, locals: {exception: exception}
 <% end %>
 
 <table>
@@ -9,6 +9,7 @@
     <th>Currency</th>
     <th>Carrier</th>
     <th>Service</th>
+    <th>Choose Rate</th>
   </tr>
   <% shipment.rates.each do |rate| %>
     <tr>

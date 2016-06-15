@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require 'sinatra/flash'
 require 'easypost'
 require 'tilt/erb'
 require 'dotenv'
@@ -7,9 +6,8 @@ require 'pry'
 require './lib/helpers'
 
 class App < Sinatra::Base
-  set :show_exceptions, false
+  set :show_exceptions, :after_handler
   enable :sessions
-  register Sinatra::Flash
   helpers Helpers
 
   configure :development, :test do
@@ -30,13 +28,11 @@ class App < Sinatra::Base
   end
 
   post '/shipment' do
-    unless EasyPost.api_key || EasyPost.api_key != ""
-      halt(401, erb(:index, locals: {error_message: "Check your API Key"}))
-    end
     # part of address object not address attribute of shipment.
     if params[:verify] == "true"
       params[:address].merge!(settings.addr_verification)
     end
+
     begin
       from_addr_id = ENV['FROM_ADDRESS_ID']
       to_address = EasyPost::Address.create(params[:address])
@@ -58,27 +54,23 @@ class App < Sinatra::Base
   end
 
   get '/shipment/:id/rates' do
-    shipment = EasyPost::Shipment.retrieve(params[:id])
-    halt 404, 'Not found' unless shipment
-    erb :rate, locals: {shipment: shipment}
+    erb :rate, locals: {shipment: retrieve_shipment}
   end
 
   post '/shipment/:id/buy' do
-    shipment = EasyPost::Shipment.retrieve(params[:id])
-    halt 404, 'Not found' unless shipment
+    shipment = retrieve_shipment
     begin
-      shipment.buy(rate: {id: params[:rate]})
+      shipment.buy(rate: {id: params[:id]})
       raise "Failed to buy label" unless shipment.postage_label
       redirect "shipment/#{shipment.id}"
-    rescue e
-      halt 400, erb(:rate, locals: {error_message: e.message})
+    rescue EasyPost::Error => e
+      halt 400, erb(:rate, locals: {exception: e})
     end
   end
 
   get '/shipment/:id' do
-    shipment = EasyPost::Shipment.retrieve(params[:id])
-    halt 404, 'Not found' unless shipment
-    erb :shipment, locals: {shipment: shipment}
+    erb :shipment, locals: {shipment: retrieve_shipment}
   end
+
   run! if app_file == $0
 end
