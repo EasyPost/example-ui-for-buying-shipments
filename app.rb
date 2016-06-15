@@ -47,7 +47,7 @@ class App < Sinatra::Base
         from_address: {id: from_addr_id},
         to_address: to_address,
         parcel: params[:parcel],
-        verify: "true",
+        verify: params[:verify],
         exception: e
       }
     end
