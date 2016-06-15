@@ -60,7 +60,7 @@ class App < Sinatra::Base
   post '/shipment/:id/buy' do
     shipment = retrieve_shipment
     begin
-      shipment.buy(rate: {id: params[:id]})
+      shipment.buy(rate: {id: params[:rate]})
       raise "Failed to buy label" unless shipment.postage_label
       redirect "shipment/#{shipment.id}"
     rescue EasyPost::Error => e
