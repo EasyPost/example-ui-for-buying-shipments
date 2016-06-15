@@ -1,37 +1,1 @@
-	<label class="control-label col-sm-4"><%= name %></label>
-
-   		<div class="col-sm-12">
-   			<input type="text" name="address[][name]" placeholder="First and last name">
-   		</div>
-
-   		<div class="col-sm-12">
-   			<input type="text" name="address[][company]" placeholder="Company Name">
-		</div>
-
-		<div class="col-sm-12">
-        	<input type="text" name="address[][street1]" placeholder="Street address1" required>
-		</div>
-
-		<div class="col-sm-10">			
-        	<input type="text" name="address[][street2]" placeholder="Street address2" >
-		</div>
-
-		<div class="col-sm-10">
-			<input type="text" name="address[][city]" placeholder="City" required>
-		</div>
-      
-		<div class="col-sm-10">
-        	<input type="text" name="address[][state]" placeholder="State" required>
-		</div>	
-
-		<div class="col-sm-10">
-        	<input type="text" name ="address[][zip]" pattern="\d{5}" placeholder="zipcode 00000" required>
-		</div>
-
-		<div class="col-sm-10">
-        	<input type="text" name ="address[][phone]" placeholder="000-000-0000">
-		</div>
-
-		<div class="col-sm-10">
-        	<input type="checkbox" name ="pre-verify" value="true"> Verify Address<br>
-		</div>
+<label class="control-label"><%= name %></label><input type="text" name="address[name]" placeholder="First and Last Name"><input type="text" name="address[company]" placeholder="Company Name"><input type="text" name="address[street1]" placeholder="Street Address1" required><input type="text" name="address[street2]" placeholder="Street Address2" ><input type="text" name="address[city]" placeholder="City" required><input type="text" name="address[state]" placeholder="State" required><input type="text" name="address[zip]" pattern="\d{5}" placeholder="Zipcode (12345)" required><input type="text" name="address[phone]" placeholder="Phone (123-456-7890)"><input type="checkbox" name ="verify" value="true"> Verify Address<br>

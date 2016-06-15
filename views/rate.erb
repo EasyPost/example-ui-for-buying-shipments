@@ -1,31 +1,28 @@
-<% if locals.keys.include?(:error_message) %>
-	<%=erb :_errors, locals: {error: error_message} %>
-<% elsif flash[:error]%>
-	<%= flash[:error] %>
+<% if locals.keys.include?(:exception) %>
+  erb :_errors, locals: {exception: exception}
 <% end %>
 
-<%=erb :_verification_message, locals: {message: @message, errors: @errors} %>
-
 <table>
-	<tr>
-		<th>Rate id</th>
-		<th>Rate</th>
-		<th>Currency</th>
-		<th>Carrier</th>
-		<th>Service</th>
-	</tr>
-	<% @shipment.each do |rate| %>
-		<tr>
-			<td><%= rate.id %></td>
-			<td><%= rate.rate %></td>
-			<td><%= rate.currency %> </td>
-			<td><%= rate.carrier %></td>
-			<td><%= rate.service %></td>
-			<td>
-				<form action = "/shipment/<%= rate.shipment_id %>/rate" method = "post">
-					<button type="submit" name="rate" value="<%=rate.id%>" class="btn btn-primary">Buy</button>
-				</form>
-			</td>
-		</tr>
-	<% end %>		
+  <tr>
+    <th>Rate id</th>
+    <th>Rate</th>
+    <th>Currency</th>
+    <th>Carrier</th>
+    <th>Service</th>
+    <th>Select Rate</th>
+  </tr>
+  <% shipment.rates.each do |rate| %>
+    <tr>
+      <td><%= rate.id %></td>
+      <td><%= rate.rate %></td>
+      <td><%= rate.currency %> </td>
+      <td><%= rate.carrier %></td>
+      <td><%= rate.service %></td>
+      <td>
+        <form action = "/shipment/<%= rate.shipment_id %>/buy" method = "post">
+          <button type="submit" name="rate" value="<%=rate.id%>" class="btn btn-primary">Buy</button>
+        </form>
+      </td>
+    </tr>
+  <% end %>
 </table>
