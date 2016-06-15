@@ -18,7 +18,7 @@
       <td><%= rate.carrier %></td>
       <td><%= rate.service %></td>
       <td>
-        <form action = "/shipment/<%= rate.shipment_id %>/label" method = "post">
+        <form action = "/shipment/<%= rate.shipment_id %>/buy" method = "post">
           <button type="submit" name="rate" value="<%=rate.id%>" class="btn btn-primary">Buy</button>
         </form>
       </td>

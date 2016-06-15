@@ -1,5 +1,5 @@
 <label class="control-label">USPS Options</label>
-<select id="selector" name="parcel[predefined_package]" onchange="hideShowInput()">
+<select id="selector" name="parcel[predefined_package]">
   <option value="Card">Flat Rate Card</option>
   <option value="FlatRateEnvelope">Flat Rate Letter Envelope</option>
   <option value="FlatRateGiftCardEnvelope">Flat Rate Gift Card Envelopes</option>
@@ -15,9 +15,9 @@
 </select>
 <div id="hide-input">
   <label class="control-label">Custom Parcel Details</label>
-    <input type="number" step="any" name="parcel[width]" placeholder="width">
-    <input type="number" step="any" name="parcel[length]" placeholder="length">
-    <input type="number" step="any" name="parcel[height]" placeholder="height">
+    <input type="number" step="any" name="parcel[width]" placeholder="width (in)">
+    <input type="number" step="any" name="parcel[length]" placeholder="length (in)">
+    <input type="number" step="any" name="parcel[height]" placeholder="height (in)s">
 </div>
 <p>Note: If you have chosen predefined package option, dimensions are not required but for weight</p>
-<input type="number" step="any" name="parcel[weight]" placeholder="weight" required>
+<input type="number" step="any" name="parcel[weight]" placeholder="weight (oz)" required>

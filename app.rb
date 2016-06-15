@@ -37,7 +37,6 @@ class App < Sinatra::Base
     if params[:verify] == "true"
       params[:address].merge!(settings.addr_verification)
     end
-
     begin
       from_addr_id = ENV['FROM_ADDRESS_ID']
       to_address = EasyPost::Address.create(params[:address])
@@ -46,7 +45,7 @@ class App < Sinatra::Base
         to_address: {id: to_address[:id]},
         parcel: params[:parcel]
       )
-      redirect "shipment/#{shipment.id}"
+      redirect "shipment/#{shipment.id}/rates"
     rescue EasyPost::Error => e
       erb :index, locals: {
         from_address: {id: from_addr_id},
@@ -58,28 +57,28 @@ class App < Sinatra::Base
     end
   end
 
-  get '/shipment/:id' do
+  get '/shipment/:id/rates' do
     shipment = EasyPost::Shipment.retrieve(params[:id])
     halt 404, 'Not found' unless shipment
     erb :rate, locals: {shipment: shipment}
   end
 
-  post '/shipment/:id/label' do
+  post '/shipment/:id/buy' do
     shipment = EasyPost::Shipment.retrieve(params[:id])
     halt 404, 'Not found' unless shipment
     begin
       shipment.buy(rate: {id: params[:rate]})
       raise "Failed to buy label" unless shipment.postage_label
-      redirect "shipment/#{shipment.id}/label"
+      redirect "shipment/#{shipment.id}"
     rescue e
       halt 400, erb(:rate, locals: {error_message: e.message})
     end
   end
 
-  get '/shipment/:id/label' do
-    shipment = EasyPost::Shipment.retrieve(params["id"])
+  get '/shipment/:id' do
+    shipment = EasyPost::Shipment.retrieve(params[:id])
     halt 404, 'Not found' unless shipment
-    erb :label, locals: {shipment: shipment}
+    erb :shipment, locals: {shipment: shipment}
   end
   run! if app_file == $0
 end
