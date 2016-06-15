@@ -1,5 +1,4 @@
 <% if locals.keys.include?(:exception) %>
-<% binding.pry %>
   <%= erb :_errors, locals: {exception: exception} %>
 <% end %>
 
