@@ -1,5 +1,3 @@
-# example-ui-for-buying-shipments
-
 ## EasyPost Example For Buying Shipments
 
 The [EasyPost API](https://www.easypost.com/getting-started) provides an easy
