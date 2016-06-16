@@ -1,18 +1,18 @@
-# example-buy-shipment-ui
+# example-ui-for-buying-shipments
 
-## EasyPost Buy Shipment Example
+## EasyPost Example For Buying Shipments
 
 The [EasyPost API](https://www.easypost.com/getting-started) provides an easy
-way to programatically create shipments and postage labels. 
+way to programatically create shipments and postage labels.
 This project provides an example for buying shipments using EasyPost API.
 
 The application provides a minimal web application that can be hosted on any
-computer, and enables one to buy shipments and receive labels along with a tracking number.
+computer, and enables one to create a sample web application to buy shipments, create labels, and verify addresses using the EasyPost API.
 
 ### Requirements
 
 1. A Windows or Mac computer running [Ruby](https://www.ruby-lang.org/en/)
-   [Bundler](http://bundler.io/)  
+   [Bundler](http://bundler.io/)
 1. An [EasyPost account](https://www.easypost.com/signup)
 
 ### Running the Application
