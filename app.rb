@@ -29,7 +29,7 @@ class App < Sinatra::Base
 
   post '/shipment' do
     begin
-      from_address = EasyPost::Address.retrieve(ENV['FROM_ADDRESS_ID'])
+      from_address = EasyPost::Address.new(ENV['FROM_ADDRESS_ID'])
       to_address = if params[:verify] == "true"
                      EasyPost::Address.create(params[:address].merge(settings.addr_verification))
                    else
@@ -43,10 +43,6 @@ class App < Sinatra::Base
       redirect "shipment/#{shipment.id}/rates"
     rescue EasyPost::Error => e
       erb :index, locals: {
-        from_address: from_address,
-        to_address: to_address,
-        parcel: params[:parcel],
-        verify: params[:verify],
         exception: e
       }
     end
