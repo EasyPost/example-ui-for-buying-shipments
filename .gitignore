@@ -4,4 +4,6 @@
 .Trashes
 .Spotlight-V100
 
-.env
+# Ignore built bundled gems
+/vendor/bundle
+.bundle
