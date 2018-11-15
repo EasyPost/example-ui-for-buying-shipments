@@ -7,3 +7,6 @@
 # Ignore built bundled gems
 /vendor/bundle
 .bundle
+
+# pinning gems is overrated
+Gemfile.lock
